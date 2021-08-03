@@ -1,9 +1,12 @@
 # ExportBookmarksSMD2022
+
+Creative Commons
+
 Using Luna's SMD exporter code, this allows you to export SMDs directly from the frame ranges in Maya's native Bookmark Manager 
 
 https://github.com/LunaRyuko/SourceMayaTools
 
-Creative Commons
+Intended to be paired with https://github.com/GOUST3D/ExportImportBookmarks2022
 
 Tools for importing and exporting .smd data from the Animation Bookmark Manager frame range featured in Maya 2022
 
@@ -23,6 +26,5 @@ and name it "exSMD" or "Export"
 2) Export
 3) ????
 4) Sauce
-
 
 #  Enjoy
