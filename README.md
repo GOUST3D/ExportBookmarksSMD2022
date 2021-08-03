@@ -7,6 +7,9 @@ Using Luna's SMD exporter code, this allows you to export SMDs directly from the
 https://github.com/LunaRyuko/SourceMayaTools (Put into script button, adds window menu)
 
 
+![Snap](https://cdn.discordapp.com/attachments/569400960988872704/872000324947300414/HGbT8e7LIh.gif)
+
+
 Intended to be paired with https://github.com/GOUST3D/ExportImportBookmarks2022
 
 Tools for importing and exporting .smd data from the Animation Bookmark Manager frame range featured in Maya 2022
