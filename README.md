@@ -33,4 +33,4 @@ and name it "exSMD" or "Export"
 
 https://docs.google.com/document/d/1EAi7tj-qkM_WjoiKJuykcGG54dbrUrgSvk2RwdrT9OY/edit
 
-Personal Maya Cheat Sheet
+Personal Maya Hotkey Chart
