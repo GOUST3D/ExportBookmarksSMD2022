@@ -107,6 +107,28 @@ def GetJointList():
     return joints
 
 
+def RecursiveCheckIsTopNode(cSelectionList, currentNode): # Checks if the given node has ANY selected parent, grandparent, etc joints
+    if currentNode.parentCount() == 0:
+        return True
+
+    for i in range(currentNode.parentCount()):
+        parentDagPath = OpenMaya.MDagPath()
+        parentNode = OpenMaya.MFnDagNode(currentNode.parent(i))
+        parentNode.getPath(parentDagPath)
+
+        if not parentDagPath.hasFn(OpenMaya.MFn.kJoint): # Not a joint, but still check parents
+            if not RecursiveCheckIsTopNode(cSelectionList, parentNode):
+                return False # A parent joint is selected, we're done
+            else:
+                continue # No parent joints are selected, ignore this node
+
+        if cSelectionList.hasItem(parentDagPath):
+            return False
+        else:
+            if not RecursiveCheckIsTopNode(cSelectionList, parentNode):
+                return False
+
+    return True
 
 def GetJointData(jointC):
     jointNode = jointC[1]
@@ -250,7 +272,7 @@ def ExportBookmarksSMD():
         print(str(scenepath)+str(name)+".smd", bookmark_frames[i][0], bookmark_frames[i][1])
         ExportSMDAnim(str(scenepath)+"/_SMDexport/"+str(name)+".smd", bookmark_frames[i][0], bookmark_frames[i][1])
         
-    cmds.confirmDialog(title="Success!", message="Exported Selected Joints into Animation SMDs!", icon="information")
+    cmds.confirmDialog(title="Success!", message="Exported Selected Joints!", icon="information")
     os.startfile(str(scenepath)+"/_SMDexport/")
 
 
