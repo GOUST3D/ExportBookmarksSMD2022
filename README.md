@@ -26,10 +26,9 @@ and name it "exSMD" or "Export"
 #  Usage
 
 0) Select skeleton hierarchy (select root bone, Viewport > RMB > Select Hierarchy)
-1) Select meshes
-2) Export
-3) ????
-4) Sauce
+1) Export
+2) ????
+3) Sauce
 
 #  Enjoy
 
