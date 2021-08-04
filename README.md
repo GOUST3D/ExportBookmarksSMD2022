@@ -25,8 +25,9 @@ and name it "exSMD" or "Export"
 
 #  Usage
 
-0) Select skeleton hierarchy (select root bone, Viewport > RMB > Select Hierarchy)
-1) Export
+0) Export Reference model with skeleton
+0) Select skeleton hierarchy only (select root bone, Viewport > RMB > Select Hierarchy)
+1) Export (Skeletal Animation data)
 2) ????
 3) Sauce
 
