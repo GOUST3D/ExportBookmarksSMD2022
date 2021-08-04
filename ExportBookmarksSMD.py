@@ -63,6 +63,11 @@ def __math_matrixtoquat__(maya_matrix):
 
 
 
+CM_TO_INCH = 0.3937007874015748031496062992126 # 1cm = 50/127in
+PI_CONST = 3.141592
+
+
+
 def GetJointList():
     joints = []
 
@@ -160,6 +165,36 @@ def GetJointData(jointC):
     return ( joint_offset, jointRotQuat )
 
 
+def WriteJointData(f, jointC):
+    jointNode = jointC[1]
+    # Get the joint's transform
+    path = OpenMaya.MDagPath() 
+    jointNode.getPath(path)
+    transform = OpenMaya.MFnTransform(path)
+    
+    # Get joint position
+    pos = transform.getTranslation(OpenMaya.MSpace.kTransform)
+    
+    # Get scale (almost always 1)
+    scaleUtil = OpenMaya.MScriptUtil()
+    scaleUtil.createFromList([1,1,1], 3)
+    scalePtr = scaleUtil.asDoublePtr()
+    transform.getScale(scalePtr)
+    scale = [OpenMaya.MScriptUtil.getDoubleArrayItem(scalePtr, 0), OpenMaya.MScriptUtil.getDoubleArrayItem(scalePtr, 1), OpenMaya.MScriptUtil.getDoubleArrayItem(scalePtr, 2)]
+    
+    # Get rotation matrix (mat is a 4x4, but the last row and column arn't needed)
+    jointRotQuat = __math_matrixtoquat__(cmds.getAttr(path.fullPathName()+".matrix"))
+
+    eulerRotation = jointRotQuat.asEulerRotation()
+
+    joint_offset = (pos.x*CM_TO_INCH, pos.y*CM_TO_INCH, pos.z*CM_TO_INCH)
+
+    joint_rotation = (eulerRotation.x,eulerRotation.y,eulerRotation.z)
+
+    joint_scale = (scale[0], scale[1], scale[2])
+
+    f.write("%f %f %f  %f %f %f\n" % (joint_offset[0] * scale[0], joint_offset[1] * scale[1], joint_offset[2] * scale[2], joint_rotation[0], joint_rotation[1], joint_rotation[2]))
+
 
 
 def ExportSMDAnim(filePath, frameStart, frameEnd):
@@ -240,10 +275,6 @@ def ExportSMDAnim(filePath, frameStart, frameEnd):
     cmds.currentUnit(linear=currentunit_state, angle=currentangle_state)
 
 
-"""
-from maya.plugin.timeSliderBookmark.timeSliderBookmark import frameAllBookmark
-from maya.plugin.timeSliderBookmark.timeSliderBookmark import getAllBookmarks
-"""
 
 
 def ExportBookmarksSMD():
