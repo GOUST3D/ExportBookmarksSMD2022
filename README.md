@@ -25,8 +25,8 @@ and name it "exSMD" or "Export"
 
 #  Usage
 
-0) Export Reference model with skeleton
-0) Select skeleton hierarchy only (select root bone, Viewport > RMB > Select Hierarchy)
+0) Export Reference Model + Skeleton with Luna's Source Maya Tools 
+0) Select Skeleton Hierarchy Only (Select Root Bone, Viewport > RMB > Select Hierarchy)
 1) Export (Skeletal Animation data)
 2) ????
 3) Sauce
